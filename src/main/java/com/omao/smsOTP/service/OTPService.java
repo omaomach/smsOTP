@@ -53,6 +53,7 @@ public class OTPService {
     public Mono<String> validateOTP(String userInputOTP, String username) {
 
         if (userInputOTP.equals(otpMap.get(username))) {
+            otpMap.remove(username, userInputOTP);
             return Mono.just("Valid OTP, please proceed");
         }else {
             return Mono.error(new IllegalArgumentException("Invalid OTP, please try again"));
